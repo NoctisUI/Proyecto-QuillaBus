@@ -1,0 +1,29 @@
+# Despliegue de QuillaBus cuando el repositorio incluye la carpeta quillabus-backend.
+# Render > New > Blueprint > selecciona este render.yaml.
+databases:
+  - name: quillabus-db
+    plan: free
+    databaseName: quillabus
+    user: quillabus
+
+services:
+  - type: web
+    name: quillabus
+    runtime: node
+    plan: free
+    rootDir: quillabus-backend
+    buildCommand: npm install && npm run build
+    startCommand: npm run setup && npm start
+    healthCheckPath: /api/salud
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DEMO_PASSWORD
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: quillabus-db
+          property: connectionString

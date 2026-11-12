@@ -1,0 +1,18 @@
+# Dependencias y secretos
+node_modules/
+.env
+.env.*
+!.env.example
+*.log
+firebase-credenciales*.json
+
+# PostgreSQL portable local y material de trabajo
+.localpg/
+backend_extracted/
+files.zip
+/quillabus (1).html
+
+# Sistema
+.DS_Store
+Thumbs.db
+coverage/
