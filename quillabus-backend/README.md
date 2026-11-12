@@ -195,21 +195,21 @@ Render ofrece HTTPS automático y PostgreSQL gestionado. Hay dos formas según c
 
 ### Opción A: el repositorio incluye la carpeta `quillabus-backend` (recomendada)
 
-En la raíz de este proyecto ya existe `render.yaml` con `rootDir: quillabus-backend`.
+En la raíz de este proyecto ya existe `render.yaml` con `rootDir: quillabus-backend`. El repositorio está publicado en <https://github.com/NoctisUI/Proyecto-QuillaBus>.
 
-1. Crea un repositorio en GitHub y sube el proyecto completo:
-   ```bash
-   git init
-   git add .
-   git commit -m "QuillaBus listo"
-   git branch -M main
-   git remote add origin https://github.com/TU-USUARIO/quillabus.git
-   git push -u origin main
-   ```
-2. En Render: **New > Blueprint**, conecta el repositorio y confirma `render.yaml`.
+1. Abre el [flujo de Blueprint en Render](https://render.com/deploy?repo=https://github.com/NoctisUI/Proyecto-QuillaBus) e inicia sesión con GitHub.
+2. Autoriza el repositorio (público o privado, según corresponda) y confirma `render.yaml`.
 3. Render crea la base `quillabus-db` y el servicio web. En el primer arranque, `npm run setup` crea las tablas y siembra los datos.
 4. En **Environment** del servicio, copia el valor generado de `DEMO_PASSWORD` para entrar como administrador. `JWT_SECRET` también se genera automáticamente.
 5. Abre la URL `https://tu-app.onrender.com`. La app se sirve en `/` y la API en `/api`.
+
+Si haces cambios locales, publícalos con:
+
+```bash
+git push origin main
+```
+
+Render volverá a desplegar automáticamente porque el Blueprint tiene `autoDeploy: true`.
 
 ### Opción B: el repositorio es solo la carpeta del backend
 
