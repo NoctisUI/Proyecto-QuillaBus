@@ -143,7 +143,7 @@ function pintarMapaConductor() {
   if (mapaConductor) { quitarMapa(mapaConductor); mapaConductor = null; }
   const centro = ps.length ? [ps[0].latitud, ps[0].longitud] : [10.9878, -74.7889];
   mapaConductor = L.map(cont, { zoomControl: true, zoomAnimation: false, fadeAnimation: false }).setView(centro, 13);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap' }).addTo(mapaConductor);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, referrerPolicy: 'strict-origin-when-cross-origin', attribution: '&copy; OpenStreetMap' }).addTo(mapaConductor);
   const coords = ps.map(p => [p.latitud, p.longitud]);
   capaConductor = L.layerGroup().addTo(mapaConductor);
   if (coords.length > 1) {

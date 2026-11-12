@@ -618,7 +618,7 @@ function pintarMapa() {
   const ps = Estado.paradasPorRuta[ruta.id] || [];
   const centro = ps.length ? [ps[0].latitud, ps[0].longitud] : [10.9878, -74.7889];
   mapa = L.map(cont, { zoomControl: true, attributionControl: true, zoomAnimation: false, fadeAnimation: false }).setView(centro, 13);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>' }).addTo(mapa);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, referrerPolicy: 'strict-origin-when-cross-origin', attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>' }).addTo(mapa);
   const coords = ps.map(p => [p.latitud, p.longitud]);
   lineaRuta = L.polyline(coords.length > 1 ? coords : [centro], { color: ruta.color, weight: 5, opacity: .88, lineJoin: 'round' }).addTo(mapa);
   capaParadas = L.layerGroup().addTo(mapa);
@@ -1012,7 +1012,7 @@ function pintarMapaConductor() {
   if (mapaConductor) { quitarMapa(mapaConductor); mapaConductor = null; }
   const centro = ps.length ? [ps[0].latitud, ps[0].longitud] : [10.9878, -74.7889];
   mapaConductor = L.map(cont, { zoomControl: true, zoomAnimation: false, fadeAnimation: false }).setView(centro, 13);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap' }).addTo(mapaConductor);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, referrerPolicy: 'strict-origin-when-cross-origin', attribution: '&copy; OpenStreetMap' }).addTo(mapaConductor);
   const coords = ps.map(p => [p.latitud, p.longitud]);
   capaConductor = L.layerGroup().addTo(mapaConductor);
   if (coords.length > 1) {

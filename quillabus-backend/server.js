@@ -27,7 +27,9 @@ app.use(helmet({
       upgradeInsecureRequests: process.env.NODE_ENV === 'production' ? [] : null
     }
   },
-  crossOriginEmbedderPolicy: false
+  crossOriginEmbedderPolicy: false,
+  // OSM exige un Referer válido para servir teselas; no lo elimines con no-referrer.
+  referrerPolicy: { policy: 'strict-origin-when-cross-origin' }
 }));
 if (process.env.CORS_ORIGIN) app.use(cors({ origin: process.env.CORS_ORIGIN.split(',').map(s => s.trim()) }));
 app.use(express.json({ limit: '50kb' }));

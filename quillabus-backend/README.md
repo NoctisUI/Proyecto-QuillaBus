@@ -259,6 +259,7 @@ Sin esos valores, el botón aparece como **No configurado** y las alertas siguen
 - El login/registro limita intentos fallidos por IP. Los inicios exitosos no cuentan para el límite.
 - CORS queda desactivado si `CORS_ORIGIN` está vacío, porque la app es del mismo origen.
 - Helmet aplica CSP para permitir solo Leaflet/unpkg, tiles OSM, fuentes de Google, OSRM y Firebase.
+- El mapa envía un `Referer` válido (`strict-origin-when-cross-origin`) para cumplir la política de uso de teselas de OpenStreetMap. Para tráfico alto, usa un proveedor de teselas con plan propio.
 - El GPS se comparte únicamente mientras el conductor tiene un recorrido en curso y lo autoriza en el navegador.
 - En producción cambia `DEMO_PASSWORD` antes del primer `npm run setup`. Si ya sembraste la base, puedes cambiar la clave desde PostgreSQL o recrear la base de desarrollo.
 - Un recorrido nunca se finaliza solo si el conductor cierra la pestaña; el administrador puede ver el estado y el conductor puede retomarlo al volver.
@@ -272,6 +273,7 @@ Sin esos valores, el botón aparece como **No configurado** y las alertas siguen
 | `La base ya tiene datos, no se cargó la demostración` | Es normal en despliegues posteriores. Para reiniciar en local, recrea la base. |
 | El ETA muestra `—` | No hay buses en servicio. Inicia un recorrido desde la cuenta conductor o ejecuta `npm run simular`. |
 | El mapa no carga | Revisa la conexión a unpkg/OpenStreetMap y la consola del navegador. El resto de funciones sigue operativo. |
+| El mapa muestra “Access blocked” | OpenStreetMap no recibió un `Referer` válido. Mantén la política `strict-origin-when-cross-origin` de Helmet y el `referrerPolicy` de las capas Leaflet; si persiste, cambia a un proveedor de teselas con plan propio. |
 | El GPS no envía | Abre la app por HTTPS o localhost, concede permiso de ubicación y pulsa **Reintentar GPS**. |
 | `Demasiados intentos fallidos` | Espera unos minutos; el límite es por IP y solo cuenta intentos fallidos. |
 | Push no se activa | Completa `public/firebase-config.js`, define las credenciales del backend y vuelve a desplegar. |
